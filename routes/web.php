@@ -36,5 +36,6 @@ Route::resource('pizza', PizzaController::class);
 Route::resource('status', StatusController::class);
 
 Route::get('homepage', [PizzaController::class, 'index'])->name('homepage');
+Route::get('winkelwagen', [BestellingController::class, 'winkelwagen'])->name('winkelwagen');
 
 require __DIR__.'/auth.php';

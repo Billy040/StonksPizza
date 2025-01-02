@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Klant extends Model
 {
-    //
+    protected $fillable = ['naam', 'adres', 'telefoonnummer', 'email', 'wachtwoord'];
 }

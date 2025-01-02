@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medewerker extends Model
 {
-    //
+    protected $fillable = ['naam', 'email', 'wachtwoord'];
 }

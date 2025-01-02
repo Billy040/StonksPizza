@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Formaat extends Model
 {
-    //
+    protected $fillable = ['formaat'];
 }
