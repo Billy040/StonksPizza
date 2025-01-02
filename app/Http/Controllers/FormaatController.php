@@ -12,7 +12,9 @@ class FormaatController extends Controller
      */
     public function index()
     {
-        //
+        $formaat = Formaat::all();
+
+        return view('formaat.index', compact('formaat'));
     }
 
     /**

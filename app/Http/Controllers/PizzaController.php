@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Formaat;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class PizzaController extends Controller
     public function index()
     {
         $pizzas = Pizza::all();
-        return view('homepage', compact('pizzas'));
+        $formaten = Formaat::all();
+        return view('homepage', compact('pizzas', 'formaten'));
     }
 
     /**
