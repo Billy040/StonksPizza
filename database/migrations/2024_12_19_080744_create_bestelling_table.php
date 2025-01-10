@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bestelling', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('klant_id')->constrained('klant');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('status_id')->constrained('status');
             $table->float('totaalBedrag');
         });
