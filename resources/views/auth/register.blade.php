@@ -16,7 +16,10 @@
 
         <ul class="flex space-x-6">
             <li>
-                <a href="{{ route('homepage') }}" class="hover:text-yellow-300 transition">Homepage</a>
+                <a href="{{ route('homepage') }}" class="hover:text-yellow-300 transition">Home</a>
+            </li>
+            <li>
+                <a href="{{ route('menu') }}" class="hover:text-yellow-300 transition">Menu</a>
             </li>
             <li>
                 <a href="{{ route('login') }}" class="hover:text-yellow-300 transition">Login</a>
