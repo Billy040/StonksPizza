@@ -15,8 +15,14 @@ class PizzaController extends Controller
     {
         $pizzas = Pizza::all();
         $formaten = Formaat::all();
+
+        if (request()->routeIs('menu')) {
+            return view('menu', compact('pizzas', 'formaten'));
+        }
+
         return view('homepage', compact('pizzas', 'formaten'));
     }
+
 
     /**
      * Show the form for creating a new resource.
