@@ -10,11 +10,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestellingController;
+use App\Http\Controllers\WinkelwagenController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
+Route::get('homepage', [PizzaController::class, 'index'])->name('homepage');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('menu', [PizzaController::class, 'index'])->name('menu');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,13 +30,18 @@ Route::middleware('auth')->group(function () {
 Route::resource('bestelling', BestellingController::class);
 Route::resource('formaat', FormaatController::class);
 Route::resource('ingredienten', IngredientenController::class);
-Route::resource('klant', KlantController::class);
 Route::resource('manager', ManagerController::class);
 Route::resource('medewerker', MedewerkerController::class);
 Route::resource('pizza', PizzaController::class);
 Route::resource('status', StatusController::class);
+Route::resource('winkelwagen', WinkelwagenController::class);
 
-Route::get('homepage', [PizzaController::class, 'index'])->name('homepage');
-Route::get('winkelwagen', [BestellingController::class, 'winkelwagen'])->name('winkelwagen');
+Route::get('winkelwagen', [WinkelwagenController::class, 'index'])->name('winkelwagen');
+
+Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+Route::post('register', [KlantController::class, 'register'])->name('register');
+
+Route::post('login', [KlantController::class, 'login'])->name('custom-login-action');
 
 require __DIR__.'/auth.php';
