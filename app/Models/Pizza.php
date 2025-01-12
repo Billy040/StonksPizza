@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Pizza extends Model
@@ -18,5 +17,10 @@ class Pizza extends Model
     public function formaten(): BelongsToMany
     {
         return $this->belongsToMany(Formaat::class);
+    }
+
+    public function ingredienten()
+    {
+        return $this->belongsToMany(Ingredient::class, 'ingredienten_pizza', 'pizza_id', 'ingredienten_id');
     }
 }
