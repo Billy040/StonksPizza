@@ -39,7 +39,7 @@
     <img src="https://img.pikbest.com/wp/202344/cooking-delicious-top-view-of-pizza-on-a-textured-gray-background-concept_9925164.jpg!w700wp" class="w-full h-[calc(100vh-4rem)] object-cover">
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center">
-        <h1 class="text-white text-4xl font-bold shadow-lg"><Welkom></Welkom> op Stonk's Pizza</h1>
+        <h1 class="text-white text-4xl font-bold shadow-lg"><Welkom></Welkom>Welkom op Stonk's Pizza</h1>
         <p class="text-white text-2xl shadow-lg">Bestel hier de lekkerste pizza's van authentieke Italiaanse smaak.</p>
         <button class="bg-red-600 text-white rounded-full hover:bg-red-700 py-4 px-8 mt-8 shadow-lg font-semibold text-lg transition-all transform hover:scale-105">
             <a href="{{ route('menu') }}">
