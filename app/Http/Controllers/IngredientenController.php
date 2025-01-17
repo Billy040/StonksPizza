@@ -52,7 +52,7 @@ class IngredientenController extends Controller
         $ingredienten = Ingredienten::all();
         $pizza = Pizza::with('ingredienten')->findOrFail($id);
 
-        return view('edit', compact('pizza'));
+        return view('edit', compact('pizza', 'ingredienten'));
     }
 
     /**
