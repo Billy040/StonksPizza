@@ -13,14 +13,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        $pizzas = Pizza::all();
-        $formaten = Formaat::all();
-
-        if (request()->routeIs('menu')) {
-            return view('menu', compact('pizzas', 'formaten'));
-        }
-
-        return view('homepage', compact('pizzas', 'formaten'));
+        return view('homepage');
     }
 
 
@@ -70,5 +63,13 @@ class PizzaController extends Controller
     public function destroy(Pizza $pizza)
     {
         //
+    }
+
+    public function menu()
+    {
+        $pizzas = Pizza::all();
+        $formaten = Formaat::all();
+
+        return view('menu', compact('pizzas', 'formaten'));
     }
 }

@@ -15,7 +15,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('homepage', [PizzaController::class, 'index'])->name('homepage');
 
-Route::get('menu', [PizzaController::class, 'index'])->name('menu');
+Route::get('menu', [PizzaController::class, 'menu'])->name('menu');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,7 +32,7 @@ Route::resource('formaat', FormaatController::class);
 Route::resource('ingredienten', IngredientenController::class);
 Route::resource('manager', ManagerController::class);
 Route::resource('medewerker', MedewerkerController::class);
-Route::resource('pizza', PizzaController::class);
+Route::resource('pizza', PizzaController::class)->except('edit');
 Route::resource('status', StatusController::class);
 Route::resource('winkelwagen', WinkelwagenController::class);
 
@@ -43,5 +43,9 @@ Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('lo
 Route::post('register', [KlantController::class, 'register'])->name('register');
 
 Route::post('login', [KlantController::class, 'login'])->name('custom-login-action');
+
+Route::get('/pizza/{id}/edit', [IngredientenController::class, 'edit'])->name('ingredienten.edit');
+
+
 
 require __DIR__.'/auth.php';

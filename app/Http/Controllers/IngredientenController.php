@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ingredienten;
+use App\Models\Pizza;
 use Illuminate\Http\Request;
 
 class IngredientenController extends Controller
@@ -12,7 +13,7 @@ class IngredientenController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -36,15 +37,22 @@ class IngredientenController extends Controller
      */
     public function show(Ingredienten $ingredienten)
     {
-        //
+
+        $ingredienten = Ingredienten::all();
+        $pizzas  = Pizza::with('ingredienten');
+
+        return view('edit', compact('ingredienten', 'pizzas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ingredienten $ingredienten)
+    public function edit($id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
     {
-        //
+        $ingredienten = Ingredienten::all();
+        $pizza = Pizza::with('ingredienten')->findOrFail($id);
+
+        return view('edit', compact('pizza'));
     }
 
     /**

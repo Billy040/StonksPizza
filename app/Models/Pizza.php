@@ -19,8 +19,8 @@ class Pizza extends Model
         return $this->belongsToMany(Formaat::class);
     }
 
-    public function ingredienten()
+    public function ingredienten(): BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class, 'ingredienten_pizza', 'pizza_id', 'ingredienten_id');
+        return $this->belongsToMany(Ingredienten::class, 'ingredienten_pizza', 'pizza_id', 'ingredienten_id');
     }
 }
