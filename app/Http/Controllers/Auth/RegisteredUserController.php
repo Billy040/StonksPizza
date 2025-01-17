@@ -17,10 +17,15 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create()
     {
+        if (auth()->check()) {
+            return redirect()->route('homepage');
+        }
+
         return view('auth.register');
     }
+
 
     /**
      * Handle an incoming registration request.
@@ -47,6 +52,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('login', absolute: false));
+        return redirect()->intended(route('homepage') ? route('homepage') : '/');
     }
 }
