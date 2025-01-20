@@ -47,5 +47,10 @@ Route::post('login', [KlantController::class, 'login'])->name('custom-login-acti
 Route::get('/pizza/{id}/edit', [IngredientenController::class, 'edit'])->name('ingredienten.edit');
 
 
+//winkelwagen
+Route::get('winkelwagen', [WinkelwagenController::class, 'index'])->name('winkelwagen.index');
+Route::post('winkelwagen/toevoegen/{id}', [WinkelwagenController::class, 'VoegAanWinkelwagen'])->name('winkelwagen.toevoegen');
+Route::delete('winkelwagen/verwijderen/{id}', [WinkelwagenController::class, 'VerwijderItem'])->name('winkelwagen.verwijderen');
+Route::post('winkelwagen/legen', [WinkelwagenController::class, 'LeegWinkelwagen'])->name('winkelwagen.legen');
 
 require __DIR__.'/auth.php';
