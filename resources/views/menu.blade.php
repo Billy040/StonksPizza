@@ -46,7 +46,7 @@
                 </li>
             @endauth
             <li>
-                <a href="{{ route('winkelwagen') }}" class="hover:text-yellow-300 transition">Winkelwagen</a>
+                <a href="{{ route('winkelwagen.index') }}" class="hover:text-yellow-300 transition">Winkelwagen</a>
             </li>
         </ul>
     </nav>
@@ -79,9 +79,12 @@
                             <option value="{{ $formaat->id }}" {{ $formaat->id == 2 ? 'selected' : ''}}>{{ $formaat->formaat }}</option>
                         @endforeach
                     </select>
-                    <button class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
+                    <form method="POST" action="{{ route('winkelwagen.toevoegen', ['id' => $pizza->id]) }}">
+                    @csrf
+                    <button type="submit" class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
                         voeg toe aan winkelwagen
                     </button>
+                    </form>
                 </div>
             </li>
         @endforeach

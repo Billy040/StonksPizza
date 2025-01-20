@@ -45,7 +45,7 @@
                 </li>
             @endauth
             <li>
-                <a href="{{ route('winkelwagen') }}" class="hover:text-yellow-300 transition">Winkelwagen</a>
+                <a href="{{ route('winkelwagen.index') }}" class="hover:text-yellow-300 transition">Winkelwagen</a>
             </li>
         </ul>
     </nav>
