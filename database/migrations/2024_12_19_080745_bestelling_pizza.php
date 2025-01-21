@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bestelling_pizza', function (Blueprint $table) {
             $table->foreignId('bestelling_id')->constrained('bestelling');
             $table->foreignId('pizza_id')->constrained('pizza');
+            $table->integer('aantal');
             $table->primary(['bestelling_id', 'pizza_id']);
         });
     }
