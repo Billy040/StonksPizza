@@ -16,12 +16,8 @@
         <a href="{{ route('homepage') }}" class="text-2xl font-bold">Stonk's Pizza</a>
 
         <ul class="flex space-x-6">
-            <li>
-                <a href="{{ route('homepage') }}" class="hover:text-yellow-300 transition">Home</a>
-            </li>
-            <li>
-                <a href="{{ route('menu') }}" class="hover:text-yellow-300 transition">Menu</a>
-            </li>
+            <li><a href="{{ route('homepage') }}" class="hover:text-yellow-300 transition">Home</a></li>
+            <li><a href="{{ route('menu') }}" class="hover:text-yellow-300 transition">Menu</a></li>
 
             @auth
                 <li>
@@ -32,22 +28,14 @@
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="hover:text-yellow-300 transition">
-                            Logout
-                        </button>
+                        <button type="submit" class="hover:text-yellow-300 transition">Logout</button>
                     </form>
                 </li>
             @else
-                <li>
-                    <a href="{{ route('login') }}" class="hover:text-yellow-300 transition">Login</a>
-                </li>
-                <li>
-                    <a href="{{ route('register') }}" class="hover:text-yellow-300 transition">Registreer</a>
-                </li>
+                <li><a href="{{ route('login') }}" class="hover:text-yellow-300 transition">Login</a></li>
+                <li><a href="{{ route('register') }}" class="hover:text-yellow-300 transition">Registreer</a></li>
             @endauth
-            <li>
-                <a href="{{ route('winkelwagen.index') }}" class="hover:text-yellow-300 transition">Winkelwagen</a>
-            </li>
+            <li><a href="{{ route('winkelwagen.index') }}" class="hover:text-yellow-300 transition">Winkelwagen</a></li>
         </ul>
     </nav>
 </header>
@@ -73,18 +61,28 @@
                     <p>{{ $pizza->beschrijving }}</p>
                     <p id="prijs-{{ $pizza->id }}" style="font-size:large">€{{ $pizza->prijs }}</p>
 
-                    <select class="mt-4 w-full py-2 px-4 border border-gray-300 rounded"
+                    <select name="size" id="size_{{ $pizza->id }}" class="mt-4 w-full py-2 px-4 border border-gray-300 rounded"
                             onchange="updatePrijs({{ $pizza->prijs }}, this.value, {{ $pizza->id }})">
                         @foreach($formaten as $formaat)
-                            <option value="{{ $formaat->id }}" {{ $formaat->id == 2 ? 'selected' : ''}}>{{ $formaat->formaat }}</option>
+                            <option value="{{ $formaat->id }}"
+                                    data-name="{{ $formaat->formaat }}"
+                                {{ $formaat->id == 2 ? 'selected' : '' }}>
+                                {{ $formaat->formaat }}
+                            </option>
                         @endforeach
                     </select>
+
                     <form method="POST" action="{{ route('winkelwagen.toevoegen', ['id' => $pizza->id]) }}">
-                    @csrf
-                    <button type="submit" class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
-                        voeg toe aan winkelwagen
-                    </button>
+                        @csrf
+                        <input type="hidden" name="calculated_price" id="calculated_price_{{ $pizza->id }}" value="{{ $pizza->prijs }}">
+                        <input type="hidden" name="size_name" id="size_name_{{ $pizza->id }}" value="Medium">
+                        <input type="hidden" name="size" id="size_hidden_{{ $pizza->id }}" value="2"> <!-- Default to Medium -->
+
+                        <button type="submit" class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
+                            Voeg toe aan winkelwagen
+                        </button>
                     </form>
+
                 </div>
             </li>
         @endforeach
