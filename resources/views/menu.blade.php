@@ -76,7 +76,7 @@
                         @csrf
                         <input type="hidden" name="calculated_price" id="calculated_price_{{ $pizza->id }}" value="{{ $pizza->prijs }}">
                         <input type="hidden" name="size_name" id="size_name_{{ $pizza->id }}" value="Medium">
-                        <input type="hidden" name="size" id="size_hidden_{{ $pizza->id }}" value="2"> <!-- Default to Medium -->
+                        <input type="hidden" name="size" id="size_hidden_{{ $pizza->id }}" value="2">
 
                         <button type="submit" class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
                             Voeg toe aan winkelwagen
