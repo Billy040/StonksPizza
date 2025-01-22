@@ -63,4 +63,12 @@ class BestellingController extends Controller
     {
         //
     }
+
+    public function status($bestelling_id)
+    {
+
+        $bestelling = Bestelling::with('pizzas', 'status')->findOrFail($bestelling_id);
+
+        return view('status', compact('bestelling'));
+    }
 }
