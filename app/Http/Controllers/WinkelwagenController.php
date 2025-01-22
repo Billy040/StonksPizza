@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bestelling;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,16 @@ class WinkelwagenController extends Controller
 {
     public function index()
     {
-        return view('winkelwagen');
+        $winkelwagen = session()->get('winkelwagen', []);
+        $totaalBedrag = 0;
+
+        foreach ($winkelwagen as $item) {
+            $totaalBedrag += $item['prijs'] * $item['aantal'];
+        }
+
+        session()->get('totaalBedrag', $totaalBedrag);
+
+        return view('winkelwagen', ['winkelwagen' => $winkelwagen, 'totaalBedrag' => $totaalBedrag]);
     }
 
     public function VoegAanWinkelwagen(Request $request, $id)
@@ -62,4 +72,51 @@ class WinkelwagenController extends Controller
         session()->forget('winkelwagen');
         return redirect()->back()->with('success', 'Winkelwagen is geleegd');
     }
+    public function bestellen(Request $request)
+    {
+        $validated = $request->validate([
+            'naam' => 'required|string|max:255',
+            'telefoonnummer' => 'required|string|max:20',
+            'adres' => 'required|string|max:255',
+            'postcode' => 'required|string|max:20',
+        ]);
+
+        $winkelwagen = session()->get('winkelwagen', []);
+        if (empty($winkelwagen)) {
+            return redirect()->back()->withErrors(['error' => 'Uw winkelwagen is leeg.']);
+        }
+
+        $totaalBedrag = 0;
+        foreach ($winkelwagen as $item) {
+            $totaalBedrag += $item['prijs'] * $item['aantal'];
+        }
+
+        $bestelling = Bestelling::create([
+            'user_id' => auth()->id(),
+            'status_id' => 1,
+            'telefoonnummer' => $validated['telefoonnummer'],
+            'adres' => $validated['adres'],
+            'postcode' => $validated['postcode'],
+            'totaalBedrag' => $totaalBedrag,
+        ]);
+
+        foreach ($winkelwagen as $id => $details) {
+            $bestelling->pizzas()->attach($id, [
+                'formaat_id' => $details['size_id'],
+                'aantal' => $details['aantal'],
+                'telefoonnummer' => $validated['telefoonnummer'],
+                'prijs' => $details['prijs'],
+            ]);
+        }
+
+        session()->forget('winkelwagen');
+
+
+        return redirect()->route('bestelling.status', ['id' => $bestelling->id])
+            ->with('success', 'Uw bestelling is geplaatst.');
+    }
+
+
+
+
 }
