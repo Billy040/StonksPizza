@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('status_id')->constrained('status');
+            $table->string('telefoonnummer')->nullable();
+            $table->string('adres');
+            $table->string('postcode');
             $table->float('totaalBedrag');
+            $table->timestamps();
         });
     }
 

@@ -12,10 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bestelling_pizza', function (Blueprint $table) {
-            $table->foreignId('bestelling_id')->constrained('bestelling');
-            $table->foreignId('pizza_id')->constrained('pizza');
+            $table->foreignId('bestelling_id')->constrained('bestelling')->onDelete('cascade');
+            $table->foreignId('pizza_id')->constrained('pizza')->onDelete('cascade');
+            $table->foreignId('formaat_id')->constrained('formaat')->onDelete('cascade');
+            $table->string('telefoonnummer')->nullable();
             $table->integer('aantal');
-            $table->primary(['bestelling_id', 'pizza_id']);
+            $table->decimal('prijs', 8, 2);
+            $table->primary(['bestelling_id', 'pizza_id', 'formaat_id']);
         });
     }
 
