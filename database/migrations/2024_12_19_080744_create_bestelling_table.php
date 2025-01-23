@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bestelling', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('status_id')->constrained('status');
             $table->string('telefoonnummer')->nullable();
             $table->string('adres');
