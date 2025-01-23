@@ -62,7 +62,7 @@
         @foreach($bestelling->pizzas as $pizza)
             <li class="mb-4">
                 <p><strong>Pizza:</strong> {{ $pizza->naam }}</p>
-                <p><strong>Formaat:</strong> {{ $pizza->pivot->formaat_id }}</p>
+                <p><strong>Formaat:</strong> {{ $pizza->pivot->formaat }}</p>
                 <p><strong>Aantal:</strong> {{ $pizza->pivot->aantal }}</p>
                 <p><strong>Prijs:</strong> €{{ number_format($pizza->pivot->prijs, 2) }}</p>
             </li>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('naam');
             $table->string('beschrijving');
             $table->decimal('prijs', 5, 2);
-            $table->string('image');
+            $table->binary('image')->nullable();
         });
     }
 
