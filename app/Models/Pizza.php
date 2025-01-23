@@ -13,7 +13,7 @@ class Pizza extends Model
 
     protected $table = 'pizza';
     protected $primaryKey = 'id';
-    protected $fillable = ['naam', 'prijs', 'omschrijving', 'afbeelding'];
+    protected $fillable = ['naam', 'prijs', 'omschrijving', 'image'];
 
     public function formaten(): BelongsToMany
     {

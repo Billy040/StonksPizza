@@ -69,6 +69,10 @@ class BestellingController extends Controller
 
         $bestelling = Bestelling::with('pizzas', 'status')->findOrFail($bestelling_id);
 
-        return view('status', compact('bestelling'));
+        if(!$bestelling){
+            return view('status', ['bestelling' => null, 'message' => 'Er is nog geen bestelling geplaatst']);
+        }
+
+        return view('status', ['bestelling' => $bestelling]);
     }
 }

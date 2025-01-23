@@ -47,11 +47,9 @@
     </nav>
 </header>
 
-
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-4">Order Status</h1>
+<div class="container mx-auto px-4 py-8 text-center">
+    <h1 class="text-3xl font-bold mb-4">Status bestelling</h1>
     <h2 class="text-xl mb-2">Order ID: {{ $bestelling->id }}</h2>
-    <p><strong>Status:</strong> {{ $bestelling->status->status }}</p>
     <p><strong>Telefoonnummer:</strong> {{ $bestelling->telefoonnummer }}</p>
     <p><strong>Adres:</strong> {{ $bestelling->adres }}</p>
     <p><strong>Postcode:</strong> {{ $bestelling->postcode }}</p>
@@ -69,6 +67,26 @@
         @endforeach
     </ul>
 </div>
+
+<div class="container mx-auto px-4 py-8">
+    <div class="w-full bg-gray-300 rounded-lg overflow-hidden">
+        <div class="flex h-8">
+
+            @php
+                $totalSections = 6;
+            @endphp
+
+            @for ($i = 1; $i <= $totalSections; $i++)
+                <div class="flex-1 {{ $i <= $bestelling->status_id ? 'bg-red-600' : 'bg-gray-200' }}"></div>
+            @endfor
+        </div>
+    </div>
+    <p class="text-center mt-4 font-semibold">
+        Voortgang: {{ round(($bestelling->status_id / $totalSections) * 100) }}%
+    </p>
+</div>
+
+<h1 class="text-center text-3xl"><strong>Status:</strong> {{ $bestelling->status->status }}</h1>
 
 
 </body>
