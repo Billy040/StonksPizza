@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bestelling extends Model
 {
+    public $timestamps = false;
     protected $table = 'bestelling';
     protected $fillable = ['user_id', 'status_id', 'totaalBedrag', 'adres', 'postcode', 'telefoonnummer'];
 
