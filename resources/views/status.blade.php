@@ -73,16 +73,16 @@
         <div class="flex h-8">
 
             @php
-                $totalSections = 6;
+                $aantalStatusen = 6;
             @endphp
 
-            @for ($i = 1; $i <= $totalSections; $i++)
+            @for ($i = 1; $i <= $aantalStatusen; $i++)
                 <div class="flex-1 {{ $i <= $bestelling->status_id ? 'bg-red-600' : 'bg-gray-200' }}"></div>
             @endfor
         </div>
     </div>
     <p class="text-center mt-4 font-semibold">
-        Voortgang: {{ round(($bestelling->status_id / $totalSections) * 100) }}%
+        Voortgang: {{ round(($bestelling->status_id / $aantalStatusen) * 100) }}%
     </p>
 </div>
 

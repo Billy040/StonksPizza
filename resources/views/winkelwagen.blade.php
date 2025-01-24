@@ -107,15 +107,6 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <label for="opmerkingen" class="block">Opmerkingen</label>
-                    <textarea id="opmerkingen" name="opmerkingen" class="w-full border border-gray-300 rounded p-2
-                        @error('opmerkingen') border-red-500 @enderror">{{ old('opmerkingen') }}</textarea>
-                    @error('opmerkingen')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
                 <div>
                     <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
                         Bestellen

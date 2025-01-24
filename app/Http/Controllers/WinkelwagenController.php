@@ -75,10 +75,11 @@ class WinkelwagenController extends Controller
     public function bestellen(Request $request)
     {
         $validated = $request->validate([
-            'naam' => 'required|string|max:255',
+            'naam' => 'required|string|max:50',
+            'email' => 'required|email|max:255',
             'telefoonnummer' => 'required|string|max:20',
             'adres' => 'required|string|max:255',
-            'postcode' => 'required|string|max:20',
+            'postcode' => 'required|string|max:6', 'regex:/^[0-9]{4}[A-Z]{2}$/',
         ]);
 
         $winkelwagen = session()->get('winkelwagen', []);
