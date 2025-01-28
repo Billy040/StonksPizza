@@ -13,6 +13,10 @@
                     {{ Auth::user()->name }}
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('medewerkers.index') }}" class="hover:text-yellow-300 transition">Medewerkers</a>
+            </li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

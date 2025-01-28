@@ -12,7 +12,8 @@ class MedewerkerController extends Controller
      */
     public function index()
     {
-        //
+        $medewerkers = Medewerker::all();
+        return view('medewerkers.index', compact('medewerkers'));
     }
 
     /**
@@ -20,7 +21,7 @@ class MedewerkerController extends Controller
      */
     public function create()
     {
-        //
+        return view('medewerkers.create');
     }
 
     /**
@@ -28,38 +29,58 @@ class MedewerkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'email' => 'required|email|unique:medewerkers',         
+        ]);
+
+        Medewerker::create($validated);
+
+        return redirect()->route('medewerkers.index')->with('success', 'Medewerker toegevoegd!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Medewerker $medewerker)
+    public function show(string $id)
     {
-        //
+        $medewerker = Medewerker::findOrFail($id);
+        return view('medewerkers.show', compact('medewerker'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Medewerker $medewerker)
+    public function edit(string $id)
     {
-        //
+        $medewerker = Medewerker::findOrFail($id);
+        return view('medewerkers.edit', compact('medewerker'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Medewerker $medewerker)
+    public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'email' => 'required|email|unique:medewerkers',         
+        ]);
+
+        $medewerker = Medewerker::findOrFail($id);
+        $medewerker->update($validated);
+        
+        return redirect()->route('medewerkers.index')->with('success', 'Medewerker bijgewerkt!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Medewerker $medewerker)
+    public function destroy(string $id)
     {
-        //
+        Medewerker::destroy($id);
+        return redirect()->route('medewerkers.index')->with('success', 'Medewerker verwijderd!');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Medewerker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,6 @@ class MedewerkerSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('medewerker')->insert([
-            'naam' => 'Jan Peterson',
-            ]);
+        Medewerker::factory()->count(20)->create();
     }
 }

@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Medewerker extends Model
 {
-    protected $fillable = ['naam', 'email', 'wachtwoord'];
+    use HasFactory;
+    
+    protected $fillable = [
+        'voornaam',
+        'achternaam',
+        'email',
+    ];
 }
