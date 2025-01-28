@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'adres' => 'Kerkstraat 1',
             'telefoonnummer' => '0612345678',
-            ]);
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
+            'adres' => 'Kerkstraat 1',
+            'telefoonnummer' => '0612345678',
+        ]);
     }
 }

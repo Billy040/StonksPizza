@@ -13,7 +13,9 @@ use App\Http\Controllers\BestellingController;
 use App\Http\Controllers\WinkelwagenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
+Route::get('/', [PizzaController::class, 'index'])->name('homepage');
 Route::get('homepage', [PizzaController::class, 'index'])->name('homepage');
+
 
 Route::get('menu', [PizzaController::class, 'menu'])->name('menu');
 
