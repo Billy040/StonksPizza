@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\BestellingSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,7 +13,9 @@ class Pizza extends Model
 
     protected $table = 'pizza';
     protected $primaryKey = 'id';
-    protected $fillable = ['naam', 'prijs', 'omschrijving', 'afbeelding'];
+    protected $fillable = ['naam', 'prijs', 'beschrijving', 'image'];
+
+    public $timestamps = false;
 
     public function formaten(): BelongsToMany
     {
@@ -22,5 +25,9 @@ class Pizza extends Model
     public function ingredienten(): BelongsToMany
     {
         return $this->belongsToMany(Ingredienten::class, 'ingredienten_pizza', 'pizza_id', 'ingredienten_id');
+    }
+
+    public function bestellingen(){
+        return $this->belongsToMany(Bestelling::class, 'bestelling_pizza')->withPivot('formaat_id, aantal', 'prijs');
     }
 }

@@ -22,7 +22,12 @@
         @foreach($pizzas as $pizza)
             <li class="bg-white rounded-2xl shadow-2xl overflow-hidden py-0 border border-black">
                 <div class="relative">
-                    <img class="rounded-lg" src="{{ asset($pizza->image) }}" alt="{{ $pizza->naam }}">
+                    @if ($pizza->image)
+                        <img class="rounded-lg w-full h-48 object-cover" src="data:image/jpeg;base64,{{ base64_encode($pizza->image) }}" alt="{{ $pizza->naam }}">
+                    @else
+                        <img class="rounded-lg w-full h-48 object-cover" src="{{ asset('images/default-pizza.jpg') }}" alt="Standaard afbeelding">
+                    @endif
+
                     <button class="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-800 transition">
                         <a href="{{ route('ingredienten.edit', ['id' => $pizza->id]) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,8 +45,9 @@
                             onchange="updatePrijs({{ $pizza->prijs }}, this.value, {{ $pizza->id }})">
                         @foreach($formaten as $formaat)
                             <option value="{{ $formaat->id }}"
-                                    data-name="{{ $formaat->formaat }}"
+
                                 {{ $formaat->id == 2 ? 'selected' : '' }}>
+
                                 {{ $formaat->formaat }}
                             </option>
                         @endforeach
@@ -51,7 +57,7 @@
                         @csrf
                         <input type="hidden" name="calculated_price" id="calculated_price_{{ $pizza->id }}" value="{{ $pizza->prijs }}">
                         <input type="hidden" name="size_name" id="size_name_{{ $pizza->id }}" value="Medium">
-                        <input type="hidden" name="size" id="size_hidden_{{ $pizza->id }}" value="2"> <!-- Default to Medium -->
+                        <input type="hidden" name="size" id="size_hidden_{{ $pizza->id }}" value="2">
 
                         <button type="submit" class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition w-full">
                             Voeg toe aan winkelwagen
